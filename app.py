@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from flask import render_template, url_for, request
+from flask import render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -25,9 +25,13 @@ def index():
         
         try:
             db.session.add(new_task)
-            db.commit()
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was an issue in adding you task'
     else:
-        return render_template('index.html')
+        tasks = Todo.query.order_by(Todo.date_created).all()
+        return render_template('index.html', tasks = tasks)
         
     
 
