@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from flask import render_template, url_for
+from flask import render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -19,7 +19,17 @@ class Todo(db.Model):
 
 @app.route('/', methods=['POST','GET'])
 def index():
-    return render_template('index.html')
+    if request.method == 'POST':
+        task_content = request.form['content']
+        new_task = Todo(content = task_content)
+        
+        try:
+            db.session.add(new_task)
+            db.commit()
+    else:
+        return render_template('index.html')
+        
+    
 
 
 
