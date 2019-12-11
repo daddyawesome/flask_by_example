@@ -34,4 +34,6 @@ td {
 
 #content {
     width: 70%;
+    text-align: center;
+    display: inline-block;
 }
