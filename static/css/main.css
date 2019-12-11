@@ -29,8 +29,8 @@ td {
 }
 
 .form {
-    margin-top: 20px;
-    display: inline-block;
+    margin: 0 auto; 
+    width:250px;
 }
 
 #content {
